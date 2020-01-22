@@ -1,7 +1,7 @@
 import { IStyleAPI, IStyleItem } from 'import-sort-style';
 import readPkgUp from 'read-pkg-up';
 
-const fixedOrder = ['react', 'react-dom', 'prop-types'];
+const firstModules = ['react', 'react-dom', 'prop-types'];
 
 type Package = {
   dependencies?: { [key: string]: string };
@@ -21,12 +21,11 @@ export default function(styleApi: IStyleAPI): IStyleItem[] {
     naturally,
     unicode,
   } = styleApi;
-  const { pkg } = (readPkgUp.sync() as { pkg?: Package }) || {};
-
-  let modules = pkg
+  const { packageJson } = readPkgUp.sync() || {};
+  let modules = packageJson
     ? [
-        ...Object.keys(pkg.dependencies || {}),
-        ...Object.keys(pkg.devDependencies || {}),
+        ...Object.keys(packageJson.dependencies || {}),
+        ...Object.keys(packageJson.devDependencies || {}),
       ]
     : [];
 
@@ -34,10 +33,14 @@ export default function(styleApi: IStyleAPI): IStyleItem[] {
     modules.length > 0
       ? imported => modules.includes(imported.moduleName)
       : isNodeModule;
+  console.log(modules);
 
-  const reactComparator = (name1, name2) => {
-    let i1 = fixedOrder.indexOf(name1);
-    let i2 = fixedOrder.indexOf(name2);
+  // const isReactModule = imported =>
+  //   Boolean(imported.moduleName.match(/^(react|prop-types|redux)/));
+
+  const modulesComparator = (name1, name2) => {
+    let i1 = firstModules.indexOf(name1);
+    let i2 = firstModules.indexOf(name2);
 
     i1 = i1 === -1 ? Number.MAX_SAFE_INTEGER : i1;
     i2 = i2 === -1 ? Number.MAX_SAFE_INTEGER : i2;
@@ -57,7 +60,7 @@ export default function(styleApi: IStyleAPI): IStyleItem[] {
     // import … from "fs";
     {
       match: isFromNodeModules,
-      sort: moduleName(reactComparator),
+      sort: moduleName(modulesComparator),
       sortNamedMembers: alias(unicode),
     },
     { separator: true },
