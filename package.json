@@ -4,6 +4,10 @@
   "description": "An import-sort style that groups and sorts by module, prioritizing React modules",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
+  "author": "Daniel Schmidt",
+  "repository": {
+    "url": "https://github.com/charlie-tango/import-sort-style-ct.git",
+  },
   "scripts": {
     "prepublishOnly": "tsc -b .",
     "build": "tsc -b .",
