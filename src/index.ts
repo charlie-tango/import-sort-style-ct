@@ -31,15 +31,15 @@ export default function(styleApi: IStyleAPI): IStyleItem[] {
 
   const isFromNodeModules =
     modules.length > 0
-      ? imported => modules.includes(imported.moduleName)
+      ? imported => modules.some(name => imported.moduleName.startsWith(name))
       : isNodeModule;
 
   // const isReactModule = imported =>
   //   Boolean(imported.moduleName.match(/^(react|prop-types|redux)/));
 
   const modulesComparator = (name1, name2) => {
-    let i1 = firstModules.indexOf(name1);
-    let i2 = firstModules.indexOf(name2);
+    let i1 = firstModules.findIndex(name => name1.startsWith(name));
+    let i2 = firstModules.findIndex(name => name2.startsWith(name));
 
     i1 = i1 === -1 ? Number.MAX_SAFE_INTEGER : i1;
     i2 = i2 === -1 ? Number.MAX_SAFE_INTEGER : i2;
