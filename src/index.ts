@@ -1,7 +1,13 @@
 import { IStyleAPI, IStyleItem } from 'import-sort-style';
 import readPkgUp from 'read-pkg-up';
 
-const firstModules = ['react', 'react-dom', 'prop-types'];
+const firstModules = [
+  'react',
+  'react-dom',
+  'react-hot-loader',
+  'react-hot-loader/root',
+  'prop-types',
+];
 
 type Package = {
   dependencies?: { [key: string]: string };
@@ -29,17 +35,13 @@ export default function(styleApi: IStyleAPI): IStyleItem[] {
       ]
     : [];
 
-  const isFromNodeModules =
-    modules.length > 0
-      ? imported => modules.some(name => imported.moduleName.startsWith(name))
-      : isNodeModule;
-
-  // const isReactModule = imported =>
-  //   Boolean(imported.moduleName.match(/^(react|prop-types|redux)/));
+  const isFromNodeModules = imported =>
+    modules.some(name => imported.moduleName.startsWith(name)) ||
+    isNodeModule(imported);
 
   const modulesComparator = (name1, name2) => {
-    let i1 = firstModules.findIndex(name => name1.startsWith(name));
-    let i2 = firstModules.findIndex(name => name2.startsWith(name));
+    let i1 = firstModules.indexOf(name1);
+    let i2 = firstModules.indexOf(name2);
 
     i1 = i1 === -1 ? Number.MAX_SAFE_INTEGER : i1;
     i2 = i2 === -1 ? Number.MAX_SAFE_INTEGER : i2;
