@@ -1,0 +1,15 @@
+node_modules
+.vs
+.vscode
+.idea
+*.log
+.nuget
+_nuget
+dist
+coverage
+.DS_Store
+.env
+__generated__
+test-reports
+report.*.json
+.eslintcache
