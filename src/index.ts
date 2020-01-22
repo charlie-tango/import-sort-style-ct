@@ -33,7 +33,6 @@ export default function(styleApi: IStyleAPI): IStyleItem[] {
     modules.length > 0
       ? imported => modules.includes(imported.moduleName)
       : isNodeModule;
-  console.log(modules);
 
   // const isReactModule = imported =>
   //   Boolean(imported.moduleName.match(/^(react|prop-types|redux)/));
