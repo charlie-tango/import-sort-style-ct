@@ -6,7 +6,7 @@
   "typings": "lib/index.d.ts",
   "author": "Daniel Schmidt",
   "repository": {
-    "url": "https://github.com/charlie-tango/import-sort-style-ct.git",
+    "url": "https://github.com/charlie-tango/import-sort-style-ct.git"
   },
   "scripts": {
     "prepublishOnly": "tsc -b .",
