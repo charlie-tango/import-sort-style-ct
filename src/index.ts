@@ -64,7 +64,6 @@ export default function(styleApi: IStyleAPI): IStyleItem[] {
       sort: moduleName(modulesComparator),
       sortNamedMembers: alias(unicode),
     },
-    { separator: true },
 
     // import … from "foo";
     {

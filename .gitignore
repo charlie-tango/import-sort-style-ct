@@ -6,6 +6,7 @@ node_modules
 .nuget
 _nuget
 dist
+lib
 coverage
 .DS_Store
 .env
