@@ -12,7 +12,7 @@ sorting.
 Add the package to the project:
 
 ```sh
-yarn add prettier import sort-style-ct
+yarn add prettier import-sort-style-ct
 ```
 
 Create the [import-sort](https://github.com/renke/import-sort) configuration, so
